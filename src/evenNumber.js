@@ -1,27 +1,21 @@
+import { getTheQuestion } from './getTheQuestion.js';
+import { getUserName } from '../src/greeting.js';
+import { getRandomNum } from './getRandomNum.js';
 
-import readlineSync from 'readline-sync';
-
-const getUserName = () => {
-  const userName = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${userName}!`);
-  return userName;
-};
 
 const guessEvenNumber = () => {
-  const userName = getUserName();
   let tryCount = 0;
   let result = false;
 
+  const userName = getUserName();
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
   while ((tryCount < 3) && (result = true)) {
-    const rand = Math.floor(Math.random() * 100);
+    const rand = getRandomNum();
     const even = (rand % 2 === 0);
     const notEven = (rand % 2 !== 0);
 
-    console.log(`Question: ${rand}`);
-    const userAnswer = readlineSync.question('Your answer ');
-
+    const userAnswer = getTheQuestion(rand);
     switch (true) {
       case (even && userAnswer === 'yes'):
       case (notEven && userAnswer === 'no'):
@@ -38,8 +32,7 @@ const guessEvenNumber = () => {
         return result = true;
     }
   }
-  console.log(`Congratulations, ${userName}`);
+  console.log(`Congratulations, ${userName}!`);
 }
 
-export { getUserName };
-export { guessEvenNumber };
+export default guessEvenNumber;
