@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import guessEvenNumber from '../src/evenNumber.js';
+import guessEvenNumber from '../src/games/evenNumber.js';
 
 guessEvenNumber();
