@@ -17,7 +17,7 @@ export default function runGame(rules, callback) {
       console.log('Correct!');
       if(i === 2) console.log(`Congratulations, ${userName}!`);
     } else {
-      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'. Let's try again, Sam!`);
+      console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'. Let's try again, ${userName}`);
       break;
     }
   }

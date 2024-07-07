@@ -1,6 +1,7 @@
-import { getUserName } from '../greeting.js';
+import runGame from '../index.js';
 import { getRandomNum } from '../getRandomNum.js';
-import { getTheQuestion } from '../getTheQuestion.js';
+
+const operator = ['+', '-', '*'];
 
 const getShuffle = (arr) => {
   let j, temp;
@@ -13,58 +14,32 @@ const getShuffle = (arr) => {
   return arr;
 };
 
-export const calc = () => {
-  let tryCount = 0;
-  let result = false;
-  const operator = ['+', '-', '*'];
+function getExpressionNum() {
   const shuffle = getShuffle(operator);
+  const num1 = getRandomNum();
+  const num2 = getRandomNum();
+  const randPosition = getRandomNum(0,2);
+  const question = `${num1} ${shuffle[randPosition]} ${num2}`;
+  let correctAnswer;
 
-  const userName = getUserName();
-  console.log('What is the result of the expression?');
-
-  while ((tryCount < 3) && (result = true)) {
-    const num1 = getRandomNum();
-    const num2 = getRandomNum();
-    const expression = `${num1} ${shuffle[tryCount]} ${num2}`;
-    const userAnswer = parseInt(getTheQuestion(expression));
-
-    switch (shuffle[tryCount]) {
-      case '+':
-        if (userAnswer === (num1 + num2)) {
-          console.log('Correct!');
-          tryCount += 1;
-          break;
-        } else {
-          console.log(`${userAnswer} is wrong answer ;(. Correct answer was ${num1 + num2}.`);
-          console.log(`Let's try again, ${userName}`);
-          return result = true;
-        }
-      case '-':
-        if (userAnswer === (num1 - num2)) {
-          console.log('Correct!');
-          tryCount += 1;
-          break;
-        } else {
-          console.log(`${userAnswer} is wrong answer ;(. Correct answer was ${num1 - num2}.`);
-          console.log(`Let's try again, ${userName}`);
-          return result = true;
-        }
-      case '*':
-        if (userAnswer === (num1 * num2)) {
-          console.log('Correct!');
-          tryCount += 1;
-          break;
-        } else {
-          console.log(`${userAnswer} is wrong answer ;(. Correct answer was ${num1 * num2}.`);
-          console.log(`Let's try again, ${userName}`);
-          return result = true;
-        }
-      default:
-        console.log(`Let's try again, ${userName}`);
-        return result = true;
-    }
+  switch(shuffle[randPosition]) {
+    case '+' :
+      correctAnswer = num1 + num2;
+      break;
+    case '-' :
+      correctAnswer = num1 - num2;
+      break;
+    case '*' :
+      correctAnswer = num1 * num2;
+      break;
   }
-  console.log(`Congratulations, ${userName}!`);
+
+  return [question, String(correctAnswer)];
 }
+
+export default function calculate () {
+  runGame ('What is the result of the expression?', getExpressionNum)
+}
+
 
 
