@@ -1,15 +1,15 @@
 import runGame from '../index.js';
-import { getRandomNum } from '../getRandomNum.js';
+import getRandomNum from '../getRandomNum.js';
 
 function findNod(num1, num2) {
   let a = num1;
   let b = num2;
 
-  while (a != 0 & b != 0) {
+  while (a !== 0 && b !== 0) {
     if (a > b) {
-      a = a % b;
+      a %= b;
     } else {
-      b = b % a;
+      b %= a;
     }
   }
   return a + b;
@@ -26,5 +26,5 @@ function getNodGame() {
 }
 
 export default function guessNod() {
-  runGame('Find the greatest common divisor of given numbers', getNodGame)
+  runGame('Find the greatest common divisor of given numbers', getNodGame);
 }

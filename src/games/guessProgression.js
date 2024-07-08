@@ -1,11 +1,11 @@
 import runGame from '../index.js';
-import { getRandomNum } from '../getRandomNum.js';
+import getRandomNum from '../getRandomNum.js';
 
 function getProgression(firstElement, step, length = 10) {
-  let arr = [];  
+  const arr = [];
   arr[0] = firstElement;
 
-  for (let i = 1; i <= length; i++) {
+  for (let i = 1; i <= length; i += 1) {
     arr[i] = arr[i - 1] + step;
   }
 
@@ -16,10 +16,10 @@ function hideEle() {
   const firstElement = getRandomNum(0, 30);
   const step = getRandomNum(2, 6);
   const arr = getProgression(firstElement, step);
-  const hideEle = getRandomNum(0, arr.length);
+  const hideElement = getRandomNum(0, arr.length);
 
-  let correctAnswer = arr[hideEle];
-  arr[hideEle] = '..';
+  const correctAnswer = arr[hideElement];
+  arr[hideElement] = '..';
   const question = arr.join(' ');
 
   return [question, String(correctAnswer)];
